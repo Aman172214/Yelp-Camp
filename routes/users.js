@@ -12,7 +12,7 @@ router.post(
   catchAsync(async (req, res, next) => {
     try {
       const { username, email, password } = req.body;
-      const user = await new User({ email, username });
+      const user = new User({ email, username });
       const registeredUser = await User.register(user, password);
       req.login(registeredUser, function (err) {
         if (err) return next(err);
@@ -33,7 +33,7 @@ router.post(
   passport.authenticate("local", {
     failureFlash: true,
     failureRedirect: "/login",
-    keepSessionInfo: true
+    keepSessionInfo: true,
   }),
   (req, res) => {
     req.flash("success", "Welcome back!");

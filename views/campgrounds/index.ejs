@@ -7,7 +7,15 @@
 <div class="card mb-3">
   <div class="row">
     <div class="col-md-4">
+      <% if(campground.images.length){ %>
       <img src="<%= campground.images[0].url %>" alt="" class="img-fluid" />
+      <% } else { %>
+      <img
+        src="https://img.freepik.com/free-photo/icon-blue-paper-camera_53876-14636.jpg?w=900&t=st=1680976015~exp=1680976615~hmac=3277147b01348983acaf7e468039f5a5a393eb3fc5db7ff2e564c10a49c2cec5"
+        alt=""
+        class="img-fluid"
+      />
+      <% } %>
     </div>
     <div class="col-md-8">
       <div class="card-body">

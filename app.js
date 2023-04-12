@@ -16,6 +16,8 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 const userRoutes = require("./routes/users");
+const mongoSanitize = require("express-mongo-sanitize");
+const helmet = require("helmet");
 
 mongoose.connect("mongodb://127.0.0.1:27017/yelpCamp");
 const db = mongoose.connection;
@@ -25,7 +27,8 @@ db.once("open", () => {
 });
 
 const sessionConfig = {
-  secret: "thisshouldbeabettersecret!",
+  name: "Session",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -46,6 +49,8 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(mongoSanitize());
+app.use(helmet({ contentSecurityPolicy: false }));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -63,9 +68,9 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/reviews", reviewRoutes);
 app.use("/", userRoutes);
 
-app.get('/',(req,res)=>{
-  res.render('home')
-})
+app.get("/", (req, res) => {
+  res.render("home");
+});
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));

@@ -1,9 +1,9 @@
 <% layout('layouts/boilerplate') %>
 <div class="row mb-5">
-  <h1 class="text-center">Edit Campground</h1>
   <div class="col-md-6 offset-md-3">
     <div class="card shadow">
       <div class="card-body">
+        <h1 class="text-center card-title">Edit Campground</h1>
         <form
           action="/campgrounds/<%= campground._id %>?_method=put"
           method="post"
@@ -68,7 +68,7 @@
           </div>
           <div class="mb-3">
             <% campground.images.forEach(function(img,i){%>
-            <img src="<%= img.thumbnail %>" alt="" class="img-thumbnail" />
+            <img src="<%= img.thumbnail %>" alt="" class="img-thumbnail" crossorigin="anonymous"/>
             <div class="form-check-inline">
               <input
                 type="checkbox"

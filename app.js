@@ -18,15 +18,25 @@ const User = require("./models/user");
 const userRoutes = require("./routes/users");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
+const MongoStore = require("connect-mongo");
 
-mongoose.connect("mongodb://127.0.0.1:27017/yelpCamp");
+const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/yelpCamp";
+
+mongoose.connect(dbUrl);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
   console.log("Database Connected");
 });
 
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  secret: process.env.SESSION_SECRET,
+  touchAfter: 24 * 60 * 60,
+});
+
 const sessionConfig = {
+  store,
   name: "Session",
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -81,6 +91,8 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 
-app.listen(3000, () => {
-  console.log("Serving to port 3000!");
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`Serving On Port ${port}`);
 });

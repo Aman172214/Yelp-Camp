@@ -41,8 +41,8 @@ YelpCamp is a Yelp style website for campgrounds, where people can share campsit
 1. Clone this repository to the local computer
 
    ```
-   git clone https://github.com/Sonia-96/YelpCamp
-   cd YelpCamp
+   git clone https://github.com/Aman172214/Yelp-Camp
+   cd Yelp-Camp
    npm install 
    ```
 

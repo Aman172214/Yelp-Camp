@@ -5,20 +5,9 @@ YelpCamp is a Yelp style website for campgrounds, where people can share campsit
 ## Features
 
 ### Responsive design
-
-![homepage](images/homepage.jpg)
-
 ### Index page of campgrounds with a ClusterMap
-
-![campground index page](images/index-page.jpg)
-
 ### Campground details and its reviews
-
-![campground details](images/campground-details.jpg)
-
 ### Making new campground and editing previous posts (authentication required)
-
-![create and edit campgrounds](images/create-and-edit.jpg)
 
 ## Implementation
 

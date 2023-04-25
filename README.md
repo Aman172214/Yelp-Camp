@@ -62,4 +62,4 @@ YelpCamp is a Yelp style website for campgrounds, where people can share campsit
    ```
 
 6. Run `mongod`, then run  `node app.js` in the terminal
-7. Go to locohost:3000
+7. Go to localhost:3000
